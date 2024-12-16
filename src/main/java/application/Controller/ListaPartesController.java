@@ -6,7 +6,6 @@ import application.Model.Partes_incidencia;
 import application.Utils.CambioEscenas;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -17,7 +16,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
-import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 public class ListaPartesController extends SuperController {
@@ -31,7 +30,7 @@ public class ListaPartesController extends SuperController {
     private TableColumn<Partes_incidencia, String> DescripcionColumn;
 
     @FXML
-    private TableColumn<Partes_incidencia, String> ExpedienteColumn;
+    private TableColumn<Partes_incidencia, Integer> ExpedienteColumn;
 
     @FXML
     private TableColumn<Partes_incidencia, String> FechaColumn;
@@ -61,8 +60,8 @@ public class ListaPartesController extends SuperController {
     private AnchorPane fondoParte;
 
     ParteDAO parteDAO = new ParteDAO();
-    Partes_incidencia[] partes; //??
-    Alumnos alumno;
+    List<Partes_incidencia> partes; //??
+    Alumnos alumno1;
     Partes_incidencia parte = new Partes_incidencia();
 
     @FXML
@@ -82,7 +81,7 @@ public class ListaPartesController extends SuperController {
         FechaColumn.setCellValueFactory(new PropertyValueFactory<>("fecha"));
         DescripcionColumn.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
         SancionColumn.setCellValueFactory(new PropertyValueFactory<>("sancion"));
-        partes = parteDAO.buscarPartes();
+        partes = parteDAO.listarPartes();
         cargarPartes();
 
         // Establecer la fábrica de filas
@@ -112,8 +111,8 @@ public class ListaPartesController extends SuperController {
 
     private Node crearPaginas(int pageIndex) {
         int fromIndex = pageIndex * filaporPagina();
-        int toIndex = Math.min(fromIndex + filaporPagina(), partes.length);
-        LaTabla.setItems(FXCollections.observableList(Arrays.stream(partes).toList().subList(fromIndex, toIndex)));
+        int toIndex = Math.min(fromIndex + filaporPagina(), partes.size());
+        LaTabla.setItems(FXCollections.observableList(partes.subList(fromIndex, toIndex)));
 
         return new BorderPane(LaTabla);
     }
@@ -121,10 +120,10 @@ public class ListaPartesController extends SuperController {
     private void cargarPartes() {
         int paginas = 1;
 
-        if (partes.length % filaporPagina() == 0) {
-            paginas = partes.length / filaporPagina();
-        } else if (partes.length > filaporPagina()) {
-            paginas = partes.length / filaporPagina() + 1;
+        if (partes.size() % filaporPagina() == 0) {
+            paginas = partes.size() / filaporPagina();
+        } else if (partes.size() > filaporPagina()) {
+            paginas = partes.size() / filaporPagina() + 1;
         }
         pagination.setPageCount(paginas);
         pagination.setCurrentPageIndex(0);
@@ -144,10 +143,10 @@ public class ListaPartesController extends SuperController {
 
     public void BuscarPorNumero() {
         if (Objects.equals(BuscarNumeroExpediente.getText(), "")) {
-            partes = parteDAO.buscarPartes();
+            partes = parteDAO.listarPartes();
         } else {
-            alumno = parteDAO.buscarAlumnoByExp(BuscarNumeroExpediente.getText());
-            partes = parteDAO.buscarPartesPorId(alumno);
+            alumno1 = parteDAO.buscarAlumnoByExp(Integer.parseInt(BuscarNumeroExpediente.getText()));
+            partes = parteDAO.filtarByAlumno(alumno1);
         }
         cargarPartes();
         vaciarCampos();

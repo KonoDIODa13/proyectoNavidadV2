@@ -188,7 +188,7 @@ public class CrearParteController extends SuperController implements Initializab
     public void OnKeyPressed(KeyEvent keyEvent) {
         String teclaPulsada = keyEvent.getCode().toString();
         if (teclaPulsada.equals("TAB") || teclaPulsada.equals("ENTER")) {
-            alumno1 = parteDAO.buscarAlumnoByExp(NumExpedienteAlumnoText.getText());
+            alumno1 = parteDAO.buscarAlumnoByExp(Integer.parseInt(NumExpedienteAlumnoText.getText()));
             if (alumno1 != null) {
                 grupo1 = alumno1.getId_grupo();
                 GrupoText.setText(grupo1.getNombre_grupo());
@@ -239,7 +239,7 @@ public class CrearParteController extends SuperController implements Initializab
     }
 
     public void cargarParte() {
-        NumExpedienteAlumnoText.setText(parte1.getId_alum().getNumero_expediente());
+        NumExpedienteAlumnoText.setText(String.valueOf(parte1.getId_alum().getNumero_expediente()));
         GrupoText.setText(parte1.getId_alum().getId_grupo().getNombre_grupo());
         NombreProfesor.setText(parte1.getId_profesor().getNombre());
         FechaPicker.setValue(parte1.getFecha());
@@ -266,7 +266,6 @@ public class CrearParteController extends SuperController implements Initializab
         }
         NumExpedienteAlumnoText.setEditable(false);
         GrupoText.setEditable(false);
-
     }
 
     @FXML

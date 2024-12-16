@@ -13,12 +13,9 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class ParteDAO extends ConexionDAO {
-
-
     private final Session session = getSession();
 
-
-    public Alumnos buscarAlumnoByExp(String expediente) {
+    public Alumnos buscarAlumnoByExp(int expediente) {
         Alumnos alumno = null;
         try {
             session.beginTransaction();
@@ -27,6 +24,7 @@ public class ParteDAO extends ConexionDAO {
             session.getTransaction().commit();
         } catch (Exception e) {
             session.getTransaction().rollback();
+            System.out.println(e.getMessage());
         } finally {
             session.clear();
         }
@@ -71,6 +69,7 @@ public class ParteDAO extends ConexionDAO {
             session.beginTransaction();
             partesIncidencias = session.createQuery("from Partes_incidencia", Partes_incidencia.class)
                     .stream().toList();
+            session.getTransaction().commit();
         } catch (Exception e) {
             session.getTransaction().rollback();
         } finally {
@@ -79,7 +78,7 @@ public class ParteDAO extends ConexionDAO {
         return partesIncidencias;
     }
 
-    public Partes_incidencia[] buscarPorFecha(LocalDate fechaEmpieza, LocalDate fechaAcaba) {
+    public List<Partes_incidencia> buscarPorFecha(LocalDate fechaEmpieza, LocalDate fechaAcaba) {
         List<Partes_incidencia> listaPartes = listarPartes();
         if (fechaEmpieza == null) {
             listaPartes = listaPartes.stream()
@@ -101,7 +100,7 @@ public class ParteDAO extends ConexionDAO {
                     .toList();
 
         }
-        return listaPartes.toArray(new Partes_incidencia[0]);
+        return listaPartes;
 
     }
 

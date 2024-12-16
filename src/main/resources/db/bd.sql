@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `gestionpartes`.`alumnos` (
   `id_grupo` INT NOT NULL,
   `puntos_acumulados` INT NOT NULL,
   `nombre_alum` VARCHAR(255) NULL DEFAULT NULL,
-  `numero_expediente` VARCHAR(4) NULL DEFAULT NULL,
+  `numero_expediente` INT NULL DEFAULT NULL,
   PRIMARY KEY (`id_alum`),
   INDEX `FKoif6noujgnb1q4hfucdj3by8q` (`id_grupo` ASC))
 ENGINE = InnoDB

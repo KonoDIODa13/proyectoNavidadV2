@@ -45,7 +45,7 @@ public class Alumnos {
     private String nombre_alum;
 
     @Column(name = "numero_expediente")
-    private String numero_expediente;
+    private int numero_expediente;
 
     @OneToMany(mappedBy = "id_parte", cascade = CascadeType.ALL)
     Set<Partes_incidencia> partesIncidencias = new HashSet<>();
@@ -53,7 +53,7 @@ public class Alumnos {
     public Alumnos() {
     }
 
-    public Alumnos(Grupos id_grupo, int puntos_acumulados, String nombre_alum, String numero_expediente) {
+    public Alumnos(Grupos id_grupo, int puntos_acumulados, String nombre_alum, int numero_expediente) {
         this.id_grupo = id_grupo;
         this.puntos_acumulados = puntos_acumulados;
         this.nombre_alum = nombre_alum;
@@ -92,11 +92,11 @@ public class Alumnos {
         this.nombre_alum = nombre_alum;
     }
 
-    public String getNumero_expediente() {
+    public int getNumero_expediente() {
         return numero_expediente;
     }
 
-    public void setNumero_expediente(String numero_expediente) {
+    public void setNumero_expediente(int numero_expediente) {
         this.numero_expediente = numero_expediente;
     }
 
