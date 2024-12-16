@@ -54,6 +54,10 @@ public class ListaAlumnosController extends SuperController {
 
     @FXML
     void initialize() {
+        ExpedienteColumn.setStyle("-fx-alignment: CENTER-LEFT;");
+        NombreAlumnoColumn.setStyle("-fx-alignment: CENTER-LEFT;");
+        GrupoColumn.setStyle("-fx-alignment: CENTER-LEFT;");
+        PuntosColumn.setStyle("-fx-alignment: CENTER-LEFT;");
         // Inicializa las columnas de la tabla
         ExpedienteColumn.setCellValueFactory(data -> new ReadOnlyObjectWrapper<>(data.getValue().getNumero_expediente()));
         NombreAlumnoColumn.setCellValueFactory(data -> new ReadOnlyObjectWrapper<>(data.getValue().getNombre_alum()));

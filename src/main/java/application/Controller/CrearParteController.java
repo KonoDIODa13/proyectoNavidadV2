@@ -264,6 +264,9 @@ public class CrearParteController extends SuperController implements Initializab
                 ComboSancion.setValue(parte1.getSancion());
             }
         }
+        NumExpedienteAlumnoText.setEditable(false);
+        GrupoText.setEditable(false);
+
     }
 
     @FXML
@@ -277,9 +280,6 @@ public class CrearParteController extends SuperController implements Initializab
             } else {
                 sancion = ComboSancion.getValue().toString();
             }
-            parte.setId_alum(alumno);
-            parte.setId_grupo(alumno.getId_grupo());
-            parte.setId_profesor(profesor);
             parte.setFecha(FechaPicker.getValue());
             parte.setHora(HoraCombo.getValue().toString());
             parte.setDescripcion(DescripcionText.getText());
