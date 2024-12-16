@@ -15,79 +15,79 @@ USE `gestionpartes`;
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `gestionpartes`.`grupos`;
 CREATE TABLE IF NOT EXISTS `gestionpartes`.`grupos` (
-  `id_grupo` INT NOT NULL AUTO_INCREMENT,
-  `nombre_grupo` VARCHAR(255) NULL DEFAULT NULL,
+                                                      `id_grupo` INT NOT NULL AUTO_INCREMENT,
+                                                      `nombre_grupo` VARCHAR(255) NULL DEFAULT NULL,
   PRIMARY KEY (`id_grupo`))
-ENGINE = InnoDB
-AUTO_INCREMENT = 1
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_general_ci;
+  ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  DEFAULT CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci;
 
 -- -----------------------------------------------------
 -- Table `gestionpartes`.`alumnos`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `gestionpartes`.`alumnos`;
 CREATE TABLE IF NOT EXISTS `gestionpartes`.`alumnos` (
-  `id_alum` INT NOT NULL AUTO_INCREMENT,
-  `id_grupo` INT NOT NULL,
-  `puntos_acumulados` INT NOT NULL,
-  `nombre_alum` VARCHAR(255) NULL DEFAULT NULL,
-  `numero_expediente` INT NULL DEFAULT NULL,
+                                                       `id_alum` INT NOT NULL AUTO_INCREMENT,
+                                                       `id_grupo` INT NOT NULL,
+                                                       `puntos_acumulados` INT NOT NULL,
+                                                       `nombre_alum` VARCHAR(255) NULL DEFAULT NULL,
+  `numero_expediente` VARCHAR(255) NULL DEFAULT NULL,
   PRIMARY KEY (`id_alum`),
   INDEX `FKoif6noujgnb1q4hfucdj3by8q` (`id_grupo` ASC))
-ENGINE = InnoDB
-AUTO_INCREMENT = 1
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_general_ci;
+  ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  DEFAULT CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci;
 
 ALTER TABLE `gestionpartes`.`alumnos`
   ADD CONSTRAINT `FKoif6noujgnb1q4hfucdj3by8q`
-  FOREIGN KEY (`id_grupo`)
-  REFERENCES `gestionpartes`.`grupos` (`id_grupo`);
+    FOREIGN KEY (`id_grupo`)
+      REFERENCES `gestionpartes`.`grupos` (`id_grupo`);
 
 -- -----------------------------------------------------
 -- Table `gestionpartes`.`puntuacion_partes`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `gestionpartes`.`puntuacion_partes`;
 CREATE TABLE IF NOT EXISTS `gestionpartes`.`puntuacion_partes` (
-  `id_punt_partes` INT NOT NULL AUTO_INCREMENT,
-  `puntos` INT NOT NULL,
-  `tipo_parte` VARCHAR(255) NULL DEFAULT NULL,
+                                                                 `id_punt_partes` INT NOT NULL AUTO_INCREMENT,
+                                                                 `puntos` INT NOT NULL,
+                                                                 `tipo_parte` VARCHAR(255) NULL DEFAULT NULL,
   PRIMARY KEY (`id_punt_partes`),
   UNIQUE INDEX `UK_6m0adpsgoo0hnptrfpdvcx8vm` (`tipo_parte` ASC))
-ENGINE = InnoDB
-AUTO_INCREMENT = 1
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_general_ci;
+  ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  DEFAULT CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci;
 
 -- -----------------------------------------------------
 -- Table `gestionpartes`.`profesores`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `gestionpartes`.`profesores`;
 CREATE TABLE IF NOT EXISTS `gestionpartes`.`profesores` (
-  `id_profesor` INT NOT NULL AUTO_INCREMENT,
-  `contrasena` VARCHAR(255) NULL DEFAULT NULL,
+                                                          `id_profesor` INT NOT NULL AUTO_INCREMENT,
+                                                          `contrasena` VARCHAR(255) NULL DEFAULT NULL,
   `nombre` VARCHAR(255) NULL DEFAULT NULL,
   `numero_asignado` VARCHAR(255) NULL DEFAULT NULL,
   `tipo` VARCHAR(255) NULL DEFAULT NULL,
   PRIMARY KEY (`id_profesor`),
   UNIQUE INDEX `UK_p6ltb4s5eu3ymeanq6rdw944v` (`numero_asignado` ASC))
-ENGINE = InnoDB
-AUTO_INCREMENT = 1
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_general_ci;
+  ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  DEFAULT CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci;
 
 -- -----------------------------------------------------
 -- Table `gestionpartes`.`partes_incidencia`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `gestionpartes`.`partes_incidencia`;
 CREATE TABLE IF NOT EXISTS `gestionpartes`.`partes_incidencia` (
-  `id_alum` INT NULL DEFAULT NULL,
-  `id_grupo` INT NULL DEFAULT NULL,
-  `id_parte` INT NOT NULL AUTO_INCREMENT,
-  `id_profesor` INT NULL DEFAULT NULL,
-  `puntos` INT NULL DEFAULT NULL,
-  `descripcion` VARCHAR(255) NULL DEFAULT NULL,
+                                                                 `id_alum` INT NULL DEFAULT NULL,
+                                                                 `id_grupo` INT NULL DEFAULT NULL,
+                                                                 `id_parte` INT NOT NULL AUTO_INCREMENT,
+                                                                 `id_profesor` INT NULL DEFAULT NULL,
+                                                                 `puntos` INT NULL DEFAULT NULL,
+                                                                 `descripcion` VARCHAR(255) NULL DEFAULT NULL,
   `fecha` DATE NULL DEFAULT NULL,
   `hora` VARCHAR(255) NULL DEFAULT NULL,
   `sancion` VARCHAR(255) NULL DEFAULT NULL,
@@ -95,25 +95,25 @@ CREATE TABLE IF NOT EXISTS `gestionpartes`.`partes_incidencia` (
   INDEX `FKqrx661g5lij25bl2plx6cb2pl` (`id_alum` ASC),
   INDEX `FKckq2ajm1w9wbi3kunm8q3ldp3` (`id_grupo` ASC),
   INDEX `FKniytl2x2lvm632ic1904a1bhb` (`id_profesor` ASC))
-ENGINE = InnoDB
-AUTO_INCREMENT = 1
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_general_ci;
+  ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  DEFAULT CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci;
 
 ALTER TABLE `gestionpartes`.`partes_incidencia`
   ADD CONSTRAINT `FKckq2ajm1w9wbi3kunm8q3ldp3`
-  FOREIGN KEY (`id_grupo`)
-  REFERENCES `gestionpartes`.`grupos` (`id_grupo`);
+    FOREIGN KEY (`id_grupo`)
+      REFERENCES `gestionpartes`.`grupos` (`id_grupo`);
 
 ALTER TABLE `gestionpartes`.`partes_incidencia`
   ADD CONSTRAINT `FKniytl2x2lvm632ic1904a1bhb`
-  FOREIGN KEY (`id_profesor`)
-  REFERENCES `gestionpartes`.`profesores` (`id_profesor`);
+    FOREIGN KEY (`id_profesor`)
+      REFERENCES `gestionpartes`.`profesores` (`id_profesor`);
 
 ALTER TABLE `gestionpartes`.`partes_incidencia`
   ADD CONSTRAINT `FKqrx661g5lij25bl2plx6cb2pl`
-  FOREIGN KEY (`id_alum`)
-  REFERENCES `gestionpartes`.`alumnos` (`id_alum`);
+    FOREIGN KEY (`id_alum`)
+      REFERENCES `gestionpartes`.`alumnos` (`id_alum`);
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
