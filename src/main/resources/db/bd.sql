@@ -131,7 +131,7 @@ INSERT INTO profesores (nombre, tipo, numero_asignado, contrasena) VALUES('Maria
 INSERT INTO profesores (nombre, tipo, numero_asignado, contrasena) VALUES('Carlos Sanchez', 'profesor', 1004, '1b18033d8286c4efc126b8a131e85db079c731aca276c9204b6221ca00fedbb0');
 INSERT INTO profesores (nombre, tipo, numero_asignado, contrasena) VALUES('Laura Gomez', 'profesor', 1005, '1b18033d8286c4efc126b8a131e85db079c731aca276c9204b6221ca00fedbb0');
 INSERT INTO profesores (nombre, tipo, numero_asignado, contrasena) VALUES('Fernando Ruiz', 'profesor', 1006, '1b18033d8286c4efc126b8a131e85db079c731aca276c9204b6221ca00fedbb0');
-INSERT INTO profesores (nombre, tipo, numero_asignado, contrasena) VALUES('jaime', 'jefe_de_estudios', 8686, '821a317ba65d56d7ce4cd6124178f8a5497214a8383d4f6346736c3075d03194');
+INSERT INTO profesores (nombre, tipo, numero_asignado, contrasena) VALUES('jaime', 'jefe_de_estudios', 8686, '821a317ba65d56d7ce4cd6124178f8a5497214a8383d4f6346736c3075d03194'); /* numero asignado 8686 contraseña 8686 */
 
 
 -- Inserción de grupos en la tabla 'grupos'

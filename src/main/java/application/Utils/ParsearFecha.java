@@ -4,7 +4,6 @@ import java.time.LocalDate;
 
 public class ParsearFecha {
     public static String fechaGetMonth(LocalDate fecha) {// solo el mes
-        String mes = "";
         return switch (fecha.getMonthValue()) {
             case 1 -> "enero";
             case 2 -> "febrero";
